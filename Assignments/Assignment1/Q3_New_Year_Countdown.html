@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set-4 Q3 - New Year Countdown</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: #111827;
+            color: white;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            font-size: 42px;
+        }
+        .timer {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .box {
+            background: #1f2937;
+            padding: 20px;
+            min-width: 90px;
+            border-radius: 10px;
+        }
+        .number {
+            display: block;
+            font-size: 35px;
+            font-weight: bold;
+        }
+        .label {
+            font-size: 14px;
+            color: #d1d5db;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>New Year Countdown 🎉</h1>
+
+    <div class="timer">
+        <div class="box">
+            <span class="number" id="days">0</span>
+            <span class="label">Days</span>
+        </div>
+        <div class="box">
+            <span class="number" id="hours">0</span>
+            <span class="label">Hours</span>
+        </div>
+        <div class="box">
+            <span class="number" id="minutes">0</span>
+            <span class="label">Minutes</span>
+        </div>
+        <div class="box">
+            <span class="number" id="seconds">0</span>
+            <span class="label">Seconds</span>
+        </div>
+    </div>
+</div>
+
+<script>
+function updateCountdown() {
+    const now = new Date();
+
+    // Next New Year
+    const nextYear = now.getFullYear() + 1;
+    const newYear = new Date(nextYear, 0, 1, 0, 0, 0);
+
+    const difference = newYear - now;
+
+    if (difference <= 0) {
+        document.getElementById("days").textContent = 0;
+        document.getElementById("hours").textContent = 0;
+        document.getElementById("minutes").textContent = 0;
+        document.getElementById("seconds").textContent = 0;
+        return;
+    }
+
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(
+        (difference / (1000 * 60 * 60)) % 24
+    );
+    const minutes = Math.floor(
+        (difference / (1000 * 60)) % 60
+    );
+    const seconds = Math.floor(
+        (difference / 1000) % 60
+    );
+
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
